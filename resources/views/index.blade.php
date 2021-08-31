@@ -132,22 +132,22 @@
               </tr>
               @foreach($items as $item)
               <tr>
-                <td>
-                  2021-08-23 07:30:35
-                </td>
+                <td>2021-08-23 07:30:35</td>
                 <td>
                   <input type="text" class="input-update-txt" name="content" value="{{$item->content}}" >
                 </td>
                 <td>
-                  <form action="/todo/update" class="todo-list_content" method="POST">
+                  <form action="/todo/update/" method="POST">
                     @csrf
+                    <input type="hidden" name="id" value="{{$item->id}}">
                     <button class="update-btn">更新</button>
                   </form>
                 </td>
                 <td>
                   <form action="/todo/delete/" method="POST">
                     @csrf
-                    <button class="delete-btn">削除</button>                 
+                    <input type="hidden" name="id" value="{{$item->id}}">
+                    <button class="delete-btn">削除</button>
                   </form>
                 </td> 
               </tr>
