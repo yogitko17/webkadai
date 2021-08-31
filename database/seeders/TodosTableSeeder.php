@@ -15,7 +15,11 @@ class TodosTableSeeder extends Seeder
     public function run()
     {
         $param = [
-            'content' => 'aaa',
+            'content' => 'ababab',
+        ];
+        DB::table('todos')->insert($param);
+        $param = [
+            'content' => 'cdcdcd',
         ];
         DB::table('todos')->insert($param);
     }

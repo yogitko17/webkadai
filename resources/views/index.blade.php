@@ -116,6 +116,7 @@
             @endforeach
           </ul>
           @endif
+
           <form action="/todo/create" class="todo-list_content" method="POST">
              @csrf
             <input type="text" class="input-main-txt" name="content">
@@ -129,21 +130,28 @@
                 <th>更新</th>
                 <th>削除</th>
               </tr>
+              @foreach($items as $item)
               <tr>
-                <td>2021-08-23 07:30:35</td>
                 <td>
-                  <input type="text" class="input-update-txt" name="content">
+                  2021-08-23 07:30:35
                 </td>
                 <td>
-                  <button class="update-btn">更新</button>
+                  <input type="text" class="input-update-txt" name="content" value="{{$item->content}}" >
+                </td>
+                <td>
+                  <form action="/todo/update" class="todo-list_content" method="POST">
+                    @csrf
+                    <button class="update-btn">更新</button>
+                  </form>
                 </td>
                 <td>
                   <form action="/todo/delete/" method="POST">
                     @csrf
                     <button class="delete-btn">削除</button>                 
                   </form>
-                </td>
+                </td> 
               </tr>
+              @endforeach
             </tbody>  
           </table> 
         </div>
