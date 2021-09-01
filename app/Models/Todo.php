@@ -13,6 +13,6 @@ class todo extends Model
     protected $guarded = ['id'];
     
     public static $rules = [
-        'content' => ['required','size:20']
+        'content' => ['required','max:20']
     ];
 }
