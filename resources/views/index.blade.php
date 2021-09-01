@@ -29,10 +29,11 @@
       transform: translate(-50%, -50%);
     }
     .inner-ttl{
-      font: size 50px;
+      font-size: 50px;
     }
     .todo-list_content{
-      disply:flex;
+      display:flex;
+      justify-content:space-between;
     }
     .input-main-txt{
       width:80%;
@@ -50,12 +51,11 @@
       color:rgb(219, 54, 197);
       outline:none;
       cursor: pointer;
-      margin-left:30px;
       font-size:18px;
       background-color:white;
     }
     table{
-      text-aligin:center;
+      text-align:center;
       width:100%;
     }
     tr{
@@ -108,17 +108,17 @@
         <h1 class="inner-ttl">Todo List</h1>
         <div class="todo-list">
           @if (count($errors) > 0)
-          <ul>
-            @foreach ($errors->all() as $error)
-            <li>
-              {{$error}}
-            </li>
-            @endforeach
-          </ul>
+            <p>入力に問題があります</p>
           @endif
 
           <form action="/todo/create" class="todo-list_content" method="POST">
              @csrf
+             @error('content')
+             <tr>
+                <th>Error</th>
+                <td>{{$message}}</td>
+             </tr>
+             @enderror
             <input type="text" class="input-main-txt" name="content">
             <input type="submit" class="input-btn" value="追加">
           </form>
@@ -132,18 +132,17 @@
               </tr>
               @foreach($items as $item)
               <tr>
-                <td>2021-08-23 07:30:35</td>
-                <td>
-                  <input type="text" class="input-update-txt" name="content" value="{{$item->content}}" >
-                </td>
-                <td>
-                  <form action="/todo/update/" method="POST">
+                <form action="/todo/update/" method="POST">
                     @csrf
+                  <td><span>{{ $item->updated_at }}</span></td>
+                  <td>
                     <input type="hidden" name="id" value="{{$item->id}}">
-                    <input type="hidden" name="content" value="{{$item->content}}">
+                    <input type="text" class="input-update-txt" name="content" value="{{$item->content}}" >
+                  </td>
+                  <td>
                     <button class="update-btn">更新</button>
-                  </form>
-                </td>
+                  </td>
+                </form>
                 <td>
                   <form action="/todo/delete/" method="POST">
                     @csrf
